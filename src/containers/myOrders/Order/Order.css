@@ -1,0 +1,33 @@
+.Order {
+    width: 80%;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    padding: 10px;
+    margin: 10px auto;
+    box-sizing: border-box;
+    position: relative;
+
+}
+
+.Order strong {
+        text-transform:uppercase;
+        display: inline-block;
+        margin: 8px;
+        border: 1px solid #ccc;
+        padding: 5px;
+}
+
+.Order span {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 2rem;
+    color: rgb(163, 159, 159);
+    cursor: pointer;
+}
+
+@media (max-width: 800px) {
+    .Order p strong{
+        display: block;
+    }
+}
