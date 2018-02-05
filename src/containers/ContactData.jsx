@@ -112,11 +112,11 @@ class ContactData extends Component {
        for (let key in inputConfig) {
            
            inputsArr.push(<Input key={key} 
-                    value={this.state.orderForm[key].value} 
+                    value={inputConfig[key].value} 
                     switchType={inputConfig[key].elementType} 
                     config={inputConfig[key].elementConfig} 
                     changed={(event) => this.changeHandler(event, key)} 
-                    isValid={this.state.orderForm[key].validation.isValid}/>)
+                    isValid={inputConfig[key].validation.isValid}/>)
        }
        
         return(
