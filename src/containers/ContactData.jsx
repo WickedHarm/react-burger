@@ -11,15 +11,15 @@ class ContactData extends Component {
     state={
         loading: false,
         orderForm: {
-            name: this.inputCreator("input", "text", "Your Names"),
-            email: this.inputCreator("input", "text", "Your E-Mail"),
-            street: this.inputCreator("input", "text", "Your Address"),
-            postCode: this.inputCreator("input", "text", "Your Post Code"),
+            name: this.inputCreator("input", "text", "Your Name", {minLength: 3, maxLength: 15}),
+            email: this.inputCreator("input", "email", "Your E-Mail", {index: "@"}),
+            street: this.inputCreator("input", "text", "Your Address", {minLength: 3, maxLength: 20}),
+            postCode: this.inputCreator("input", "text", "Your Post Code", {minLength: 5, maxLength: 5}),
             deliveryMethod: this.inputCreator("select", "select", "Fastest"),
             }
         }
 
-    inputCreator (switchType, elType, placeHolder) {
+    inputCreator (switchType, elType, placeHolder, validationRules) {
        
        let formBody = {
             elementType: switchType,
@@ -27,14 +27,41 @@ class ContactData extends Component {
                 type: elType,
                 placeholder: placeHolder
             },
-            value: ""
+            value: "",
+            validation: {
+                isValid: false,
+                rules: validationRules
+            }
         }
         if (placeHolder === "Fastest") {
             formBody.value = placeHolder
        }
         return formBody
     }
+    
+    validation(key, value, rules) {
+        console.log(key)
+        let isValid = true;
+        if (value.length > rules.maxLength && isValid)  {
+            isValid = false;
+        }
+        if (value.length < rules.minLength && isValid) {
+            isValid = false;
+        }
+        if (key === "email") {
+            if (value.indexOf(rules.index) === -1 && isValid) {
+                isValid = false;
+            }
+        }
+        if (key === "postCode") {
+            if ( isNaN(+value) ) {
+                isValid = false;
+            }
+        }
+       
         
+        return !isValid
+    }
     
     orderHandler = (e, select) =>{
         e.preventDefault();
@@ -61,10 +88,17 @@ class ContactData extends Component {
     }
 
     changeHandler = (e, key) => {
+        
         let obj = {...Object.assign(this.state.orderForm)};
+        obj[key].value = e.target.value;
         
-        obj[key].value = e.target.value
-        
+        let rules = obj[key].validation.rules;
+        let value = obj[key].value;
+        if (rules) {
+            obj[key].validation.isValid = this.validation(key, value, rules);
+        }
+       
+        //console.log(obj)
         this.setState({
             orderForm: obj
         })
@@ -74,11 +108,17 @@ class ContactData extends Component {
     render() {
         const inputConfig = this.state.orderForm;
        const inputsArr = [];
+       
        for (let key in inputConfig) {
-        
-           inputsArr.push(<Input key={key} value={this.state.orderForm[key].value} switchType={inputConfig[key].elementType} 
-                config={inputConfig[key].elementConfig} changed={(event) => this.changeHandler(event, key)} />)
+           
+           inputsArr.push(<Input key={key} 
+                    value={this.state.orderForm[key].value} 
+                    switchType={inputConfig[key].elementType} 
+                    config={inputConfig[key].elementConfig} 
+                    changed={(event) => this.changeHandler(event, key)} 
+                    isValid={this.state.orderForm[key].validation.isValid}/>)
        }
+       
         return(
             <div className={classes.ContactData}>
                 <h4>Enter your Contact Data</h4>
@@ -88,6 +128,7 @@ class ContactData extends Component {
                 <form action="post" onSubmit={this.orderHandler}>
                     {inputsArr}
                     <Button btnType="Success">Send Order</Button>
+                    
                 </form>
                 }
                 

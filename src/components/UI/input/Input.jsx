@@ -5,10 +5,15 @@ import classes from "./Input.css";
 
 const input = (props) => {
     let inputElement = null;
+    let inputClasses = [classes.InputElement];
     
+    if(props.isValid) {
+        
+        inputClasses.push(classes.invalid)
+    }
     switch (props.switchType) {
         case ("input"):
-        inputElement = <input className={classes.InputElement} value={props.value} onChange={props.changed} {...props.config}/>
+        inputElement = <input className={inputClasses.join(" ")} value={props.value} onChange={props.changed} {...props.config}/>
         break;
         
         case ("textarea"):
