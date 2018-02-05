@@ -11,35 +11,45 @@ class ContactData extends Component {
     state={
         loading: false,
         orderForm: {
-            name: this.orderFormCreator("input", "text", "Your Name"),
-            email: this.orderFormCreator("input", "text", "Your E-Mail"),
-            street: this.orderFormCreator("input", "text", "Your Address"),
-            postCode: this.orderFormCreator("input", "text", "Your Post Code"),
-            deliveryMethod: this.orderFormCreator("select", "select", null),
+            name: this.inputCreator("input", "text", "Your Name"),
+            email: this.inputCreator("input", "text", "Your E-Mail"),
+            street: this.inputCreator("input", "text", "Your Address"),
+            postCode: this.inputCreator("input", "text", "Your Post Code"),
+            deliveryMethod: this.inputCreator("select", "select", "Fastest"),
             }
         }
 
-    orderFormCreator (switchType, elType, placeHolder) {
+    inputCreator (switchType, elType, placeHolder) {
        
-        return {
-                
-                elementType: switchType,
-                elementConfig: {
-                    type: elType,
-                    placeholder: placeHolder
-                },
-                value: ''
-            }
+       let formBody = {
+            elementType: switchType,
+            elementConfig: {
+                type: elType,
+                placeholder: placeHolder
+            },
+            value: ""
         }
+        if (placeHolder === "Fastest") {
+            formBody.value = placeHolder
+       }
+        return formBody
+    }
         
     
-    clickHandler = (e) =>{
+    orderHandler = (e, select) =>{
         e.preventDefault();
         this.setState({loading: true})
-
+        let contactData = {}
+        for (let key in  this.state.orderForm) {
+           contactData[key] = this.state.orderForm[key].value;
+            
+            
+        }
+        
         let order = {
             ...this.props.ingredients,
-            price: this.props.price
+            price: this.props.price,
+            contactData: contactData
         }
 
         axiosOrder.post("/orders.json", order)
@@ -75,9 +85,9 @@ class ContactData extends Component {
                 {this.state.loading ? 
                     <Spinner />
                 :    
-                <form action="post">
+                <form action="post" onSubmit={this.orderHandler}>
                     {inputsArr}
-                    <Button orderHandler={this.clickHandler} btnType="Success">Send Order</Button>
+                    <Button btnType="Success">Send Order</Button>
                 </form>
                 }
                 

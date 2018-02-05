@@ -17,7 +17,7 @@ const input = (props) => {
 
         case ("select"):
         
-        inputElement = <select className={classes.InputElement} onChange={props.changed}>
+        inputElement = <select className={classes.InputElement} defaultValue="" onChange={props.changed}>
             <option value="fastest">Fastest</option>
             <option value="cheapest">Cheapest</option>
         </select>
