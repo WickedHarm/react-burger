@@ -11,7 +11,7 @@ class ContactData extends Component {
     state={
         loading: false,
         orderForm: {
-            name: this.inputCreator("input", "text", "Your Name"),
+            name: this.inputCreator("input", "text", "Your Names"),
             email: this.inputCreator("input", "text", "Your E-Mail"),
             street: this.inputCreator("input", "text", "Your Address"),
             postCode: this.inputCreator("input", "text", "Your Post Code"),
