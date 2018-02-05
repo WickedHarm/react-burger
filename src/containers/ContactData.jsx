@@ -9,6 +9,7 @@ import classes from "./contactData.css";
 
 class ContactData extends Component {
     state={
+        formIsValid: false,
         loading: false,
         orderForm: {
             name: this.inputCreator("input", "text", "Your Name", {minLength: 3, maxLength: 15}),
@@ -30,8 +31,12 @@ class ContactData extends Component {
             value: "",
             validation: {
                 isValid: false,
-                rules: validationRules
+                rules: validationRules,
+                touched: false
             }
+        }
+        if (!validationRules) {
+            formBody.validation.isValid = true;
         }
         if (placeHolder === "Fastest") {
             formBody.value = placeHolder
@@ -40,7 +45,7 @@ class ContactData extends Component {
     }
     
     validation(key, value, rules) {
-        console.log(key)
+        
         let isValid = true;
         if (value.length > rules.maxLength && isValid)  {
             isValid = false;
@@ -54,19 +59,20 @@ class ContactData extends Component {
             }
         }
         if (key === "postCode") {
-            if ( isNaN(+value) ) {
+            if ( isNaN(+value) && isValid ) {
                 isValid = false;
             }
         }
        
         
-        return !isValid
+        return isValid
     }
     
     orderHandler = (e, select) =>{
         e.preventDefault();
         this.setState({loading: true})
-        let contactData = {}
+        let contactData = {};
+        
         for (let key in  this.state.orderForm) {
            contactData[key] = this.state.orderForm[key].value;
             
@@ -94,11 +100,27 @@ class ContactData extends Component {
         
         let rules = obj[key].validation.rules;
         let value = obj[key].value;
+        
         if (rules) {
             obj[key].validation.isValid = this.validation(key, value, rules);
+            
         }
-       
-        //console.log(obj)
+        let arr = [];
+        for (let i in obj) {
+            
+           arr.push(obj[i].validation.isValid);
+           
+        }
+        if (arr.every( i => i === true )) {
+            this.setState({
+                formIsValid: true
+            }, console.log("puk"))
+        }else {
+            this.setState({
+                formIsValid: false
+            })
+        }
+        
         this.setState({
             orderForm: obj
         })
@@ -127,7 +149,12 @@ class ContactData extends Component {
                 :    
                 <form action="post" onSubmit={this.orderHandler}>
                     {inputsArr}
+                    {this.state.formIsValid ? 
                     <Button btnType="Success">Send Order</Button>
+                    :
+                    null
+                    }
+                    
                     
                 </form>
                 }
