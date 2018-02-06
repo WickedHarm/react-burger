@@ -24,7 +24,7 @@ const order = (props) => {
             <p>Ingredients: {ingrArr}</p>
             <p>Price: <strong>USD {props.order.price}</strong></p>
             <p>Delivery: <strong>{props.order.delivery}</strong></p>
-            <span onClick={() => props.deleteHandler(props.ingredients.id)}>[x]</span>
+            <span onClick={() => props.deleteHandler(props.order.id)}>[x]</span>
         </div>
     )
    
