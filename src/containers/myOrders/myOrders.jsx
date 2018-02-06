@@ -19,10 +19,12 @@ class myOrders extends Component {
         .then( ord => {
             let ordersArr = []
             for (let key in ord.data) {
-                
+                //console.log(ord.data[key])
                 ordersArr.push({
-                    ...ord.data[key],
-                    id: key
+                    ingredients: {...ord.data[key].ingredients},
+                    id: key,
+                    price: ord.data[key].price,
+                    delivery: ord.data[key].contactData.deliveryMethod
                 })
             }
             this.setState({
@@ -53,7 +55,7 @@ class myOrders extends Component {
                 {this.state.loading ? <Spinner /> : null}
                 {this.state.orders.map( (order) => {
                 
-                    return <Order deleteHandler={this.deleteHandler} key={order.id} ingredients={order}/>
+                    return <Order deleteHandler={this.deleteHandler} key={order.id} order={order}/>
                 } )}
             </div>
         );

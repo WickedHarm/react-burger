@@ -80,7 +80,7 @@ class ContactData extends Component {
         }
         
         let order = {
-            ...this.props.ingredients,
+            ingredients: {...this.props.ingredients},
             price: this.props.price,
             contactData: contactData
         }
