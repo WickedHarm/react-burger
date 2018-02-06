@@ -114,7 +114,7 @@ class ContactData extends Component {
         if (arr.every( i => i === true )) {
             this.setState({
                 formIsValid: true
-            }, console.log("puk"))
+            }, () => {window.scrollTo(0, this.refs.form.offsetTop)})
         }else {
             this.setState({
                 formIsValid: false
@@ -125,6 +125,11 @@ class ContactData extends Component {
             orderForm: obj
         })
         
+    }
+
+    componentDidMount() {
+        //this.refs.form
+        window.scrollTo(0, this.refs.form.offsetTop)
     }
 
     render() {
@@ -142,7 +147,7 @@ class ContactData extends Component {
        }
        
         return(
-            <div className={classes.ContactData}>
+            <div ref="form" className={classes.ContactData}>
                 <h4>Enter your Contact Data</h4>
                 {this.state.loading ? 
                     <Spinner />
