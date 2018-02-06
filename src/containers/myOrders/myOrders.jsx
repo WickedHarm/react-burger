@@ -24,7 +24,8 @@ class myOrders extends Component {
                     ingredients: {...ord.data[key].ingredients},
                     id: key,
                     price: ord.data[key].price,
-                    delivery: ord.data[key].contactData.deliveryMethod
+                    delivery: ord.data[key].contactData.deliveryMethod,
+                    date: ord.data[key].date
                 })
             }
             this.setState({

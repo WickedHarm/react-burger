@@ -68,6 +68,11 @@ class ContactData extends Component {
         return isValid
     }
     
+    getDate() {
+        let date = new Date().toLocaleString("ru-RU", {hour12: false});
+        return date;
+    }
+
     orderHandler = (e, select) =>{
         e.preventDefault();
         this.setState({loading: true})
@@ -82,7 +87,8 @@ class ContactData extends Component {
         let order = {
             ingredients: {...this.props.ingredients},
             price: this.props.price,
-            contactData: contactData
+            contactData: contactData,
+            date: this.getDate()
         }
 
         axiosOrder.post("/orders.json", order)
