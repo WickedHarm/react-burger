@@ -95,7 +95,7 @@ class ContactData extends Component {
 
     changeHandler = (e, key) => {
         
-        let obj = {...Object.assign(this.state.orderForm)};
+        let obj = Object.assign(this.state.orderForm);
         obj[key].value = e.target.value;
         
         let rules = obj[key].validation.rules;
