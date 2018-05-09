@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import axiosOrder from "../axios-order";
 import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
 
 import Button from "../components/UI/Button/Button";
 import Spinner from "../components/UI/modal/Spinner/Spinner";
@@ -85,7 +86,7 @@ class ContactData extends Component {
         }
         
         let order = {
-            ingredients: {...this.props.ingredients},
+            ingredients: {...this.props.ings},
             price: this.props.price,
             contactData: contactData,
             date: this.getDate()
@@ -134,7 +135,7 @@ class ContactData extends Component {
     }
 
     componentDidMount() {
-        //this.refs.form
+        
         window.scrollTo(0, this.refs.form.offsetTop)
     }
 
@@ -175,4 +176,12 @@ class ContactData extends Component {
     }
 }
 
-export default withRouter(ContactData);
+
+const mapStateToProps = (state) => {
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice
+    }
+} 
+
+export default connect(mapStateToProps)(withRouter(ContactData));

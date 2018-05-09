@@ -1,4 +1,6 @@
 import React from "react";
+
+
 import Control from "../Control"
 import classes from "./ControlPanel.css";
 
@@ -22,5 +24,6 @@ const ControlPanel = (props) => (
         </div>
     </div>
 )
+
 
 export default ControlPanel;
