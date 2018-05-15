@@ -10,11 +10,8 @@ const Error = (OriginalComponent, axios) => {
             error: null
         }
         componentWillMount () {
-            this.reqInterceptor = axios.interceptors.request.use( req => {
-                this.setState({error: null})
-                return req
-            })
-            this.resInterceptor = axios.interceptors.response.use(res => res, err => {this.setState({error: err}); return err} )
+            this.reqInterceptor = axios.interceptors.request.use(req => req, err => {this.setState({error: err}); return Promise.reject(err)} )
+            this.resInterceptor = axios.interceptors.response.use(res => res, err => {this.setState({error: err}); return Promise.reject(err)} )
             
         }
         modalToggle = () => {

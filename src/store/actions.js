@@ -14,7 +14,8 @@ export const fetchIngredients = () => {
             .then( (resp) => dispatch({
                 type: FETCH_INGS,
                 ings: resp.data,
-                loaded: true
+                loaded: true,
+                initialFetchingError: false
             }))
             .catch( (e) => dispatch({
                 type: ERROR,

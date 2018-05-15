@@ -47,7 +47,9 @@ class BurgerBuilder extends Component {
         }
     }
     componentDidMount() {
-       this.props.loaded ? null : this.props.fetchIngredients();
+       if (this.props.loaded !== true) {
+            this.props.fetchIngredients();
+       }
     }
  
 

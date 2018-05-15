@@ -7,6 +7,7 @@ import Button from "../components/UI/Button/Button";
 import Spinner from "../components/UI/modal/Spinner/Spinner";
 import Input from "../components/UI/input/Input";
 import classes from "./contactData.css";
+import Error from "../components/UI/modal/Error";
 
 class ContactData extends Component {
     state={
@@ -184,4 +185,4 @@ const mapStateToProps = (state) => {
     }
 } 
 
-export default connect(mapStateToProps)(withRouter(ContactData));
+export default connect(mapStateToProps)(withRouter(Error(ContactData, axiosOrder)));

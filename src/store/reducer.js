@@ -41,6 +41,8 @@ const reducer = ( state = initialState, action) => {
 
         case actions.ERROR:
             return {
+                ...state,
+                loaded: action.loaded,
 
             }    
 
