@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import {Route} from "react-router-dom";
+import React, {Component, Fragment} from "react";
+import { Route, Redirect} from "react-router-dom";
 import { connect } from "react-redux";
 
 import CheckoutSummary from "../components/CheckoutSummary/CheckoutSummary";
@@ -17,10 +17,20 @@ class Checkout extends Component {
     }
    
     render() {
+        let orderIsEmpty = Object.keys(this.props.ings).map( key => this.props.ings[key] ).every( item => item === 0 );
+        
         return (
             <div>
-                <CheckoutSummary ingredients={this.props.ings} checkoutCancel={this.checkoutCancelHandler}  checkoutContinue={this.checkoutContinueHandler}/>
-                <Route path="/checkout/contact" component={ContactData} />
+                {orderIsEmpty 
+                ? 
+                 <Redirect to="/" />
+                :
+                <Fragment>
+                    <CheckoutSummary ingredients={this.props.ings} checkoutCancel={this.checkoutCancelHandler}  checkoutContinue={this.checkoutContinueHandler}/>
+                    <Route path="/checkout/contact" component={ContactData} />
+                </Fragment>
+            }
+                
             </div>
         )
     }
