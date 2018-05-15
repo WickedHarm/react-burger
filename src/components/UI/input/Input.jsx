@@ -18,7 +18,7 @@ class Input extends Component {
 
 
     render() {
-        console.log("eto render")
+        
         let inputElement = null;
     let inputClasses = [classes.InputElement];
     

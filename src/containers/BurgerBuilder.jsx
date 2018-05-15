@@ -49,7 +49,7 @@ class BurgerBuilder extends Component {
         }
     }
     componentDidMount() {
-        
+        console.log("eto mount")
         // this.setState({
             
         //     loading: true
@@ -70,7 +70,8 @@ class BurgerBuilder extends Component {
         //     this.orderBtnToggle(ingr);
         // } )
         // .catch( err => this.setState({loading: false}))
-          
+
+        this.props.loaded ? null : this.props.fetchIngredients();
     }
  
 
@@ -79,6 +80,9 @@ class BurgerBuilder extends Component {
         const disabled = {
             ...this.props.ings
         }
+
+        
+
         for (let key in disabled) {
             disabled[key] = disabled[key] <= 0;
         }
@@ -91,7 +95,7 @@ class BurgerBuilder extends Component {
                    : 
                    <OrderSum ingredients={this.props.ings} orderHandler={this.orderHandler} totalPrice={this.props.totalPrice}/> }     
                 </Modal>
-                {this.state.loading ? 
+                {!this.props.loaded ? 
                 <Spinner /> 
                 :
                 <Burger ingredients={this.props.ings}/>  
@@ -112,7 +116,8 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
     return {
         ings: state.ingredients,
-        totalPrice: state.totalPrice
+        totalPrice: state.totalPrice,
+        loaded: state.loaded
     }
 }
 
@@ -120,7 +125,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onIngAdd: (ingType) => dispatch({type: actions.ADD_ING, ingType: ingType}),
         onIngRemove: (ingType) => dispatch({type:actions.REMOVE_ING, ingType: ingType}),
-        onClear: () => dispatch({type:actions.CLEAR_INGS})
+        onClear: () => dispatch({type:actions.CLEAR_INGS}),
+        fetchIngredients: () => dispatch(actions.fetchIngredients())
     }
 }
 
