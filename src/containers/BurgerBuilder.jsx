@@ -16,9 +16,7 @@ import Error from "../components/UI/modal/Error";
 
 class BurgerBuilder extends Component {
     state = {
-        modalShow: false,
-        loading: false,
-        
+        modalShow: false
     }
   
     orderBtnToggle(ingredients) {
@@ -49,29 +47,7 @@ class BurgerBuilder extends Component {
         }
     }
     componentDidMount() {
-        console.log("eto mount")
-        // this.setState({
-            
-        //     loading: true
-        // })
-        // axiosOrder.get("/initial ingr.json")
-        // .then( resp=> {
-        //     let ingr = {...this.state.ingredients};
-        //     for (let key in ingr) {
-        //         ingr[key] = resp.data[key]
-        //         for (let i=0; i<resp.data[key]; i++) {
-        //             this.addIng(key)
-        //         }
-        //    }
-        //     this.setState({
-        //         ingredients: resp.data,
-        //         loading: false
-        //     })
-        //     this.orderBtnToggle(ingr);
-        // } )
-        // .catch( err => this.setState({loading: false}))
-
-        this.props.loaded ? null : this.props.fetchIngredients();
+       this.props.loaded ? null : this.props.fetchIngredients();
     }
  
 
@@ -81,8 +57,6 @@ class BurgerBuilder extends Component {
             ...this.props.ings
         }
 
-        
-
         for (let key in disabled) {
             disabled[key] = disabled[key] <= 0;
         }
@@ -90,10 +64,7 @@ class BurgerBuilder extends Component {
         return (
             <Fragment>
                 <Modal show={this.state.modalShow} showModalHandler={this.showModalHandler}>
-                   {this.state.loading ? 
-                   <Spinner /> 
-                   : 
-                   <OrderSum ingredients={this.props.ings} orderHandler={this.orderHandler} totalPrice={this.props.totalPrice}/> }     
+                  <OrderSum ingredients={this.props.ings} orderHandler={this.orderHandler} totalPrice={this.props.totalPrice}/>    
                 </Modal>
                 {!this.props.loaded ? 
                 <Spinner /> 

@@ -12,23 +12,14 @@ const initialState = {
 };
 
 
-// const prices = {
-//     salad: 0.4,
-//     bacon: 1.5,
-//     cheese: 1,
-//     meat: 2
-// }
-
 const prices = {
-    salad: 1,
-    bacon: 1,
+    salad: 0.4,
+    bacon: 1.5,
     cheese: 1,
-    meat: 1
+    meat: 2
 }
 
-const getTotalPrice = () => {
 
-} 
 
 
 const reducer = ( state = initialState, action) => {
