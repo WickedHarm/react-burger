@@ -34,7 +34,12 @@ const reducer = ( state = initialState, action) => {
 
             return {
                 ...state,
-                ingredients: action.ings,
+                ingredients: {
+                    salad: action.ings.salad,
+                    bacon: action.ings.bacon,
+                    cheese: action.ings.cheese,
+                    meat: action.ings.meat
+                },
                 totalPrice: price,
                 loaded: action.loaded
             };
