@@ -1,0 +1,17 @@
+.MyOrders {
+    text-align: center;
+    position: relative;
+}
+
+.DeleteBtn {
+    width: 70px;
+    border: 2px solid rgb(217, 217, 219);
+    border-radius: 50%;
+    box-shadow: 2px 3px 10px lightgray; 
+    padding: 20px;
+    float: right;
+    position: fixed;
+    top: 70px;
+    right: 37px;
+    cursor: pointer;
+}
