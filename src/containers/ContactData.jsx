@@ -88,6 +88,7 @@ class ContactData extends Component {
         
         let order = {
             ingredients: {...this.props.ings},
+            ingredientsOrder: [...this.props.ingsOrder],
             price: this.props.price,
             contactData: contactData,
             date: this.getDate()
@@ -181,6 +182,7 @@ class ContactData extends Component {
 const mapStateToProps = (state) => {
     return {
         ings: state.ingredients,
+        ingsOrder: state.ingsOrder,
         price: state.totalPrice
     }
 } 

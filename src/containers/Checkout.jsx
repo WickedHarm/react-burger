@@ -26,7 +26,7 @@ class Checkout extends Component {
                  <Redirect to="/" />
                 :
                 <Fragment>
-                    <CheckoutSummary ingredients={this.props.ings} checkoutCancel={this.checkoutCancelHandler}  checkoutContinue={this.checkoutContinueHandler}/>
+                    <CheckoutSummary ingredients={this.props.ings} ingsOrder={this.props.ingsOrder} checkoutCancel={this.checkoutCancelHandler}  checkoutContinue={this.checkoutContinueHandler}/>
                     <Route path="/checkout/contact" component={ContactData} />
                 </Fragment>
             }
@@ -39,6 +39,7 @@ class Checkout extends Component {
 const mapStateToProps = (state) => {
     return {
         ings: state.ingredients,
+        ingsOrder: state.ingsOrder,
         price: state.totalPrice
     }
 }

@@ -7,6 +7,7 @@ const initialState = {
         cheese: 0,
         meat: 0
     },
+    ingsOrder: [],
     totalPrice: 4,
     loaded: false
 };
@@ -31,7 +32,7 @@ const reducer = ( state = initialState, action) => {
                 price += (prices[key] * action.ings[key]);
                 
             }
-
+         
             return {
                 ...state,
                 ingredients: {
@@ -40,6 +41,7 @@ const reducer = ( state = initialState, action) => {
                     cheese: action.ings.cheese,
                     meat: action.ings.meat
                 },
+                ingsOrder: ["salad", "salad" , "bacon", "bacon", "cheese", "meat", "meat"],
                 totalPrice: price,
                 loaded: action.loaded
             };
@@ -52,23 +54,34 @@ const reducer = ( state = initialState, action) => {
             }    
 
         case actions.ADD_ING:
-            
+            let newIngsOrder = [...state.ingsOrder];
+            newIngsOrder.unshift(action.ingType);
+
             return {
                 ...state,
                 ingredients: {
                     ...state.ingredients,
                     [action.ingType]: ++state.ingredients[action.ingType]
                 },
+                ingsOrder: newIngsOrder,
                 totalPrice: state.totalPrice + prices[action.ingType]
             };
          
         case actions.REMOVE_ING:
+            let newIngsOrderRemove = [...state.ingsOrder];
+            let removeIndex = newIngsOrderRemove.indexOf(action.ingType);
+            
+            if (removeIndex > -1) {
+                newIngsOrderRemove.splice(removeIndex, 1);
+            }
+        
             return {
                 ...state,
                 ingredients: {
                     ...state.ingredients,
                     [action.ingType]: --state.ingredients[action.ingType]
                 },
+                ingsOrder: newIngsOrderRemove,
                 totalPrice: state.totalPrice - prices[action.ingType]
             };
 
@@ -81,6 +94,7 @@ const reducer = ( state = initialState, action) => {
                     cheese: 0,
                     meat: 0
                 },
+                ingsOrder: [],
                 totalPrice: 4
             }
             

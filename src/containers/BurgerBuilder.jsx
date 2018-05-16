@@ -71,7 +71,7 @@ class BurgerBuilder extends Component {
                 {!this.props.loaded ? 
                 <Spinner /> 
                 :
-                <Burger ingredients={this.props.ings}/>  
+                <Burger ingredients={this.props.ings} ingsOrder={this.props.ingsOrder}/>  
                 }
                 <ControlPanel
                      addIng={this.props.onIngAdd} 
@@ -90,7 +90,8 @@ const mapStateToProps = state => {
     return {
         ings: state.ingredients,
         totalPrice: state.totalPrice,
-        loaded: state.loaded
+        loaded: state.loaded,
+        ingsOrder: state.ingsOrder
     }
 }
 

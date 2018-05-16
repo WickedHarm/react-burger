@@ -14,6 +14,7 @@ export const fetchIngredients = () => {
             .then( (resp) => dispatch({
                 type: FETCH_INGS,
                 ings: resp.data,
+                ingsOrder: Object.keys(resp.data),
                 loaded: true,
                 initialFetchingError: false
             }))
