@@ -17,9 +17,14 @@ const Burger = (props) => {
     if (ingredientsOrderArr.length === 0) {
         ingredientsOrderArr = <h3>please add some shit</h3>
     }
+
+    let className = classes.Burger;
+    if (props.mini) {
+        className = classes.BurgerMini
+    }
     
     return (
-        <div className={classes.Burger}>
+        <div className={className}>
             <Ingredient type="bread-top" />
             {/* {ingredientsArr} */}
             {ingredientsOrderArr}

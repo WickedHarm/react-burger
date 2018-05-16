@@ -1,4 +1,6 @@
 import React from "react";
+
+import Burger from "../../../components/Burger/Burger";
 import classes from "./Order.css"
 
 const order = (props) => {
@@ -19,8 +21,10 @@ const order = (props) => {
             
         } );
     let price = parseFloat(props.order.price).toFixed(2);
+    console.log(props.order)
     return(
         <div className={classes.Order}>
+            <Burger mini ingredients={props.order.ingredients} ingsOrder={props.order.ingsOrder}/>
             <p>Ingredients: {ingrArr}</p>
             <p>Price: <strong>USD {price}</strong></p>
             <p>Delivery: <strong>{props.order.delivery}</strong></p>

@@ -7,6 +7,18 @@
     font-weight: bold;
     font-size: 1.2rem;
 }
+
+.BurgerMini {
+    float: left;
+    width: 200px;
+    margin-top: 30px;
+    margin-right: auto;
+    height: 150px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
 @media (min-width: 500px) and (min-height: 400px) {
     .Burger {
         width: 350px;
@@ -25,5 +37,20 @@
     .Burger {
         width: 600px;
         height: 500px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .BurgerMini {
+        width: 120px;
+        height: 100px;
+    }
+}
+
+
+@media (max-width: 580px) {
+    .BurgerMini {
+        display: none;
     }
 }

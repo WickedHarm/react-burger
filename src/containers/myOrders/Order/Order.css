@@ -9,6 +9,11 @@
 
 }
 
+.Order p {
+    text-align: left;
+    margin-left: 300px;
+}
+
 .Order strong {
         text-transform:uppercase;
         display: inline-block;
@@ -26,8 +31,29 @@
     cursor: pointer;
 }
 
+
 @media (max-width: 800px) {
     .Order p strong{
         display: block;
+    }
+}
+
+@media (max-width: 600px) {
+    .Order p {
+        display: block;
+        width: 50%;
+        margin: auto;
+        text-align: right;
+    }
+}
+
+@media (max-width: 450px) {
+    .Order p {
+        width: 70%;
+    }
+
+    .Order span {
+        right: 0;
+        top: 0;
     }
 }
