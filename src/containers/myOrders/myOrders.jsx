@@ -4,26 +4,47 @@ import axiosOrder from "../../axios-order";
 import Order from "./Order/Order";
 import Spinner from "../../components/UI/modal/Spinner/Spinner";
 import Error from "../../components/UI/modal/Error";
+import Modal from "../../components/UI/modal/Modal";
+import Confirm from "../../components/UI/modal/Confirm";
 
 import classes from "./myOrders.css";
 
 class myOrders extends Component {
     state = {
         loading: false,
-        orders: []
+        orders: [],
+        modalShow: false
     }
 
-    clearAll = () => {
+    showModalHandler = () => {
+       
+        this.setState({
+            modalShow: !this.state.modalShow
+        })
+    }
+
+    onClearHistory = () => {
+        this.showModalHandler();
         
+       
+        
+        
+    }
+
+    clearHistory = () => {
         axiosOrder.delete("/orders.json")
-            .then( res => {
-                this.setState({
-                    orders: []
-                })
+        .then( res => {
+            this.setState({
+                orders: [],
+                modalShow: !this.state.modalShow
             })
-            .catch( e => console.log(e))
-        
-        
+        })
+        .catch( e => {
+            this.setState({
+                modalShow: !this.state.modalShow
+            })
+            console.log(e)
+        })
     }
 
     getOrders() {
@@ -67,10 +88,15 @@ class myOrders extends Component {
         
         return(
             <div className={classes.MyOrders}>
-                <span className={classes.DeleteBtn} onClick={this.clearAll}>DELETE ALL ORDERS</span>
+                <Modal show={this.state.modalShow} showModalHandler={this.showModalHandler}>
+                    <Confirm onClear={this.clearHistory} showModalHandler={this.showModalHandler}/>
+                </Modal>    
                 {this.state.orders.length === 0 ? <h2>You have no orders yet</h2> : null}
                 {this.state.loading ? <Spinner /> : null}
                 {this.state.orders.map( (order) => <Order deleteHandler={this.deleteHandler} key={order.id} order={order}/>)}
+                <div className={classes.HistoryMenu}>   
+                    <span onClick={this.showModalHandler}>CLEAR HISTORY</span>
+                </div> 
             </div>
         );
     }

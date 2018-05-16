@@ -21,7 +21,7 @@ const order = (props) => {
             
         } );
     let price = parseFloat(props.order.price).toFixed(2);
-    console.log(props.order)
+    
     return(
         <div className={classes.Order}>
             <Burger mini ingredients={props.order.ingredients} ingsOrder={props.order.ingsOrder}/>

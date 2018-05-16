@@ -1,17 +1,36 @@
+.HistoryMenu {
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    bottom: 0;
+    background-color: rgb(217, 217, 219);
+    display: flex;
+}
+.HistoryMenu span {
+    margin: auto;
+    cursor: pointer;
+    border: 2px solid rgb(234, 234, 235);
+    border-radius: 15px;
+    box-shadow: 2px 3px 10px rgb(187, 184, 184); 
+    padding: 10px;
+}
+
 .MyOrders {
     text-align: center;
     position: relative;
+    padding-bottom: 50px; 
 }
 
 .DeleteBtn {
     width: 70px;
     border: 2px solid rgb(217, 217, 219);
     border-radius: 50%;
-    box-shadow: 2px 3px 10px lightgray; 
+    
     padding: 20px;
     float: right;
     position: fixed;
     top: 70px;
-    right: 37px;
+    right: 0px;
     cursor: pointer;
 }
+
