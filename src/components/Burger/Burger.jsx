@@ -4,7 +4,7 @@ import classes from "./Burger.css";
 
 const Burger = (props) => {
     
-    let ingredientsOrderArr = props.ingsOrder.map( (key, i) => <Ingredient key={key + i} type={key} /> )
+    let ingredientsOrderArr = props.ingsOrder.map( (key, i) => <Ingredient key={key + i} type={key} /> ).reverse();
 
     if (ingredientsOrderArr.length === 0) {
         ingredientsOrderArr = <h3>please add some shit</h3>

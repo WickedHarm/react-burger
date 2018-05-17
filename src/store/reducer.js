@@ -36,12 +36,9 @@ const reducer = ( state = initialState, action) => {
             return {
                 ...state,
                 ingredients: {
-                    salad: action.ings.salad,
-                    bacon: action.ings.bacon,
-                    cheese: action.ings.cheese,
-                    meat: action.ings.meat
+                    ...action.ings
                 },
-                ingsOrder: ["salad", "salad" , "bacon", "bacon", "cheese", "meat", "meat"],
+                ingsOrder: action.ingsOrder,
                 totalPrice: price,
                 loaded: action.loaded
             };
@@ -55,7 +52,7 @@ const reducer = ( state = initialState, action) => {
 
         case actions.ADD_ING:
             let newIngsOrder = [...state.ingsOrder];
-            newIngsOrder.unshift(action.ingType);
+            newIngsOrder.push(action.ingType);
 
             return {
                 ...state,

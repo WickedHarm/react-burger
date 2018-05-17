@@ -13,8 +13,8 @@ export const fetchIngredients = () => {
         axiosOrder.get("/initial ingr.json")
             .then( (resp) => dispatch({
                 type: FETCH_INGS,
-                ings: resp.data,
-                ingsOrder: Object.keys(resp.data),
+                ings: resp.data.ingrsAmount,
+                ingsOrder: resp.data.ingrsOrder,
                 loaded: true,
                 initialFetchingError: false
             }))
