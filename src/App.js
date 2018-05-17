@@ -9,7 +9,8 @@ import './App.css';
 import Checkout from './containers/Checkout';
 import myOrders from "./containers/myOrders/myOrders";
 import Success from './components/Success/Success';
-
+import Auth from "./containers/Auth/Auth";
+import ContactData from "./containers/ContactData";
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
             <Route path="/checkout" component={Checkout} />
             <Route path="/orders" component={myOrders} />
             <Route path="/success" component={Success}/>
+            <Route path="/auth" component={Auth}/>
           </Layout>
         </div>
       </BrowserRouter>  

@@ -9,66 +9,68 @@ import Input from "../components/UI/input/Input";
 import classes from "./contactData.css";
 import Error from "../components/UI/modal/Error";
 
+import {validation, inputCreator} from "../utilities/utility";
+
 class ContactData extends Component {
     state={
         formIsValid: false,
         loading: false,
         orderForm: {
-            name: this.inputCreator("input", "text", "Your Name", {minLength: 3, maxLength: 15}),
-            email: this.inputCreator("input", "email", "Your E-Mail", {index: "@"}),
-            street: this.inputCreator("input", "text", "Your Address", {minLength: 3, maxLength: 20}),
-            postCode: this.inputCreator("input", "text", "Your Post Code", {minLength: 5, maxLength: 5}),
-            deliveryMethod: this.inputCreator("select", "select", "Fastest"),
+            name: inputCreator("input", "text", "Your Name", {minLength: 3, maxLength: 15}),
+            email: inputCreator("input", "email", "Your E-Mail", {reg: /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i}),
+            street: inputCreator("input", "text", "Your Address", {minLength: 3, maxLength: 20}),
+            postCode: inputCreator("input", "text", "Your Post Code", {minLength: 5, maxLength: 5}),
+            deliveryMethod: inputCreator("select", "select", "Fastest"),
             }
         }
 
-    inputCreator (switchType, elType, placeHolder, validationRules) {
+    // inputCreator (switchType, elType, placeHolder, validationRules) {
        
-       let formBody = {
-            elementType: switchType,
-            elementConfig: {
-                type: elType,
-                placeholder: placeHolder
-            },
-            value: "",
-            validation: {
-                isValid: false,
-                rules: validationRules,
-                touched: false
-            }
-        }
-        if (!validationRules) {
-            formBody.validation.isValid = true;
-        }
-        if (placeHolder === "Fastest") {
-            formBody.value = placeHolder
-       }
-        return formBody
-    }
+    //    let formBody = {
+    //         elementType: switchType,
+    //         elementConfig: {
+    //             type: elType,
+    //             placeholder: placeHolder
+    //         },
+    //         value: "",
+    //         validation: {
+    //             isValid: false,
+    //             rules: validationRules,
+    //             touched: false
+    //         }
+    //     }
+    //     if (!validationRules) {
+    //         formBody.validation.isValid = true;
+    //     }
+    //     if (placeHolder === "Fastest") {
+    //         formBody.value = placeHolder
+    //    }
+    //     return formBody
+    // }
     
-    validation(key, value, rules) {
+    // validation(key, value, rules) {
         
-        let isValid = true;
-        if (value.length > rules.maxLength && isValid)  {
-            isValid = false;
-        }
-        if (value.length < rules.minLength && isValid) {
-            isValid = false;
-        }
-        if (key === "email") {
-            if (value.indexOf(rules.index) === -1 && isValid) {
-                isValid = false;
-            }
-        }
-        if (key === "postCode") {
-            if ( isNaN(+value) && isValid ) {
-                isValid = false;
-            }
-        }
+    //     let isValid = true;
+    //     if (value.length > rules.maxLength && isValid)  {
+    //         isValid = false;
+    //     }
+    //     if (value.length < rules.minLength && isValid) {
+    //         isValid = false;
+    //     }
+    //     if (key === "email") {
+    //         if (!value.match(rules.reg) && isValid) {
+    //             isValid = false
+    //         }
+    //     }
+    //     if (key === "postCode") {
+    //         if ( isNaN(+value) && isValid ) {
+    //             isValid = false;
+    //         }
+    //     }
        
         
-        return isValid
-    }
+    //     return isValid
+    // }
     
     getDate() {
         let date = new Date().toLocaleString("ru-RU", {hour12: false});
@@ -111,7 +113,7 @@ class ContactData extends Component {
         let value = obj[key].value;
         
         if (rules) {
-            obj[key].validation.isValid = this.validation(key, value, rules);
+            obj[key].validation.isValid = validation(key, value, rules);
             
         }
         let arr = [];
@@ -142,7 +144,7 @@ class ContactData extends Component {
     }
 
     render() {
-        const inputConfig = this.state.orderForm;
+       const inputConfig = this.state.orderForm;
        const inputsArr = [];
        
        for (let key in inputConfig) {
@@ -168,8 +170,6 @@ class ContactData extends Component {
                     :
                     null
                     }
-                    
-                    
                 </form>
                 }
                 

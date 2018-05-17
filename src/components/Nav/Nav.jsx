@@ -10,6 +10,7 @@ const Nav = () => {
         <ul>
             <NavLi link="/" >Burger Builder</NavLi>
             <NavLi link="/orders">My Orders</NavLi>
+            <NavLi link="/auth">Sign In</NavLi>
         </ul>
         </nav>
     )
