@@ -8,7 +8,8 @@ import OrderSum from "../components/Burger/OrderSum";
 import Modal from "../components/UI/modal/Modal";
 import Spinner from "../components/UI/modal/Spinner/Spinner";
 import axiosOrder from "../axios-order";
-import * as actions from "../store/actions";
+import Auth from "../containers/Auth/Auth";
+import * as actions from "../store/actions/ingrsActions";
 
 import Error from "../components/UI/modal/Error";
 
@@ -66,7 +67,8 @@ class BurgerBuilder extends Component {
         return (
             <Fragment>
                 <Modal show={this.state.modalShow} showModalHandler={this.showModalHandler}>
-                  <OrderSum ingredients={this.props.ings} orderHandler={this.orderHandler} totalPrice={this.props.totalPrice}/>    
+                  {/* <OrderSum ingredients={this.props.ings} orderHandler={this.orderHandler} totalPrice={this.props.totalPrice}/>     */}
+                    <Auth modal/>
                 </Modal>
                 {!this.props.loaded ? 
                 <Spinner /> 
@@ -88,10 +90,10 @@ class BurgerBuilder extends Component {
 
 const mapStateToProps = state => {
     return {
-        ings: state.ingredients,
-        totalPrice: state.totalPrice,
-        loaded: state.loaded,
-        ingsOrder: state.ingsOrder
+        ings: state.ingrsReducer.ingredients,
+        totalPrice: state.ingrsReducer.totalPrice,
+        loaded: state.ingrsReducer.loaded,
+        ingsOrder: state.ingrsReducer.ingsOrder
     }
 }
 

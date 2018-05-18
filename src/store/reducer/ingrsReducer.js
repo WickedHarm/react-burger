@@ -1,4 +1,4 @@
-import * as actions from "./actions";
+import * as actions from "../actions/ingrsActions";
 
 const initialState = {
     ingredients: {
@@ -23,7 +23,7 @@ const prices = {
 
 
 
-const reducer = ( state = initialState, action) => {
+const ingrsReducer = ( state = initialState, action) => {
     switch (action.type) {
 
         case actions.FETCH_INGS:
@@ -100,4 +100,4 @@ const reducer = ( state = initialState, action) => {
     }
 }
 
-export default reducer;
+export default ingrsReducer;

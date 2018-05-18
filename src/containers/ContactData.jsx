@@ -23,54 +23,6 @@ class ContactData extends Component {
             deliveryMethod: inputCreator("select", "select", "Fastest"),
             }
         }
-
-    // inputCreator (switchType, elType, placeHolder, validationRules) {
-       
-    //    let formBody = {
-    //         elementType: switchType,
-    //         elementConfig: {
-    //             type: elType,
-    //             placeholder: placeHolder
-    //         },
-    //         value: "",
-    //         validation: {
-    //             isValid: false,
-    //             rules: validationRules,
-    //             touched: false
-    //         }
-    //     }
-    //     if (!validationRules) {
-    //         formBody.validation.isValid = true;
-    //     }
-    //     if (placeHolder === "Fastest") {
-    //         formBody.value = placeHolder
-    //    }
-    //     return formBody
-    // }
-    
-    // validation(key, value, rules) {
-        
-    //     let isValid = true;
-    //     if (value.length > rules.maxLength && isValid)  {
-    //         isValid = false;
-    //     }
-    //     if (value.length < rules.minLength && isValid) {
-    //         isValid = false;
-    //     }
-    //     if (key === "email") {
-    //         if (!value.match(rules.reg) && isValid) {
-    //             isValid = false
-    //         }
-    //     }
-    //     if (key === "postCode") {
-    //         if ( isNaN(+value) && isValid ) {
-    //             isValid = false;
-    //         }
-    //     }
-       
-        
-    //     return isValid
-    // }
     
     getDate() {
         let date = new Date().toLocaleString("ru-RU", {hour12: false});
@@ -181,9 +133,9 @@ class ContactData extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        ings: state.ingredients,
-        ingsOrder: state.ingsOrder,
-        price: state.totalPrice
+        ings: state.ingrsReducer.ingredients,
+        ingsOrder: state.ingrsReducer.ingsOrder,
+        price: state.ingrsReducer.totalPrice
     }
 } 
 

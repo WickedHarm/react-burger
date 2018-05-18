@@ -6,6 +6,26 @@
     padding: 20px;
 }
 
+.AuthModal {
+    margin: 20px auto;
+    width: 90%;
+    text-align: center;
+    box-shadow: 2px 3px 10px rgb(187, 184, 184); 
+    padding-top: 5px;
+}
+
+.AuthModal a {
+    display: block;
+    padding: 20px;
+    color: rgb(53, 53, 56);
+    background-color: rgb(241, 241, 241);
+    box-shadow: 2px 3px 10px rgb(219, 218, 218);
+}
+
+.AuthModal a:hover {
+    color: rgb(243, 143, 61);
+}
+
 @media(max-width: 1000px) {
     .Auth {
         width: 60%;

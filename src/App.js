@@ -10,7 +10,7 @@ import Checkout from './containers/Checkout';
 import myOrders from "./containers/myOrders/myOrders";
 import Success from './components/Success/Success';
 import Auth from "./containers/Auth/Auth";
-import ContactData from "./containers/ContactData";
+
 
 class App extends Component {
   render() {

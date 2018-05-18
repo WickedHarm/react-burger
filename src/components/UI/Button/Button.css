@@ -8,6 +8,12 @@
     padding: 10px;
     margin: 10px;
     font-weight: bold;
+    transition: transform .2s;
+}
+
+.Button:hover {
+    transform: scale(1.2);
+    
 }
 
 .Button:first-of-type {

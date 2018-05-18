@@ -8,7 +8,8 @@ import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 import App from './App';
-import reducer from "./store/reducer";
+import reducer from "./store/reducer/index";
+
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
