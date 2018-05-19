@@ -48,7 +48,9 @@ class ContactData extends Component {
             date: this.getDate()
         }
 
-        axiosOrder.post("/orders.json", order)
+        const token = this.props.token;
+
+        axiosOrder.post("/orders.json?auth=" + token, order)
             .then( () => {
                 this.setState({loading:false})
                 this.props.history.replace("/success");
@@ -135,7 +137,8 @@ const mapStateToProps = (state) => {
     return {
         ings: state.ingrsReducer.ingredients,
         ingsOrder: state.ingrsReducer.ingsOrder,
-        price: state.ingrsReducer.totalPrice
+        price: state.ingrsReducer.totalPrice,
+        token: state.authReducer.token
     }
 } 
 

@@ -10,6 +10,7 @@ import Spinner from "../components/UI/modal/Spinner/Spinner";
 import axiosOrder from "../axios-order";
 import Auth from "../containers/Auth/Auth";
 import * as actions from "../store/actions/ingrsActions";
+import {authModalShow} from "../store/actions/authModalActions";
 
 import Error from "../components/UI/modal/Error";
 
@@ -33,6 +34,7 @@ class BurgerBuilder extends Component {
         this.setState({
             modalShow: !this.state.modalShow
         })
+        
     }
 
     orderHandler = (btnType) => {
@@ -59,16 +61,21 @@ class BurgerBuilder extends Component {
         const disabled = {
             ...this.props.ings
         }
-
+        
         for (let key in disabled) {
             disabled[key] = disabled[key] <= 0;
+        }
+        
+        let isLogged = this.props.isLogged;
+        let orderNowMethod = this.props.onAuthModalShow;
+        if(isLogged) {
+            orderNowMethod = this.showModalHandler;
         }
         
         return (
             <Fragment>
                 <Modal show={this.state.modalShow} showModalHandler={this.showModalHandler}>
-                  {/* <OrderSum ingredients={this.props.ings} orderHandler={this.orderHandler} totalPrice={this.props.totalPrice}/>     */}
-                    <Auth modal/>
+                    <OrderSum ingredients={this.props.ings} orderHandler={this.orderHandler} totalPrice={this.props.totalPrice}/>
                 </Modal>
                 {!this.props.loaded ? 
                 <Spinner /> 
@@ -81,7 +88,7 @@ class BurgerBuilder extends Component {
                      disabled={disabled} 
                      price={this.props.totalPrice} 
                      orderBtn={this.orderBtnToggle(this.props.ings)}
-                     showModal={this.showModalHandler}
+                     showModal={orderNowMethod}
                      clearOrder={this.props.onClear}/>   
             </Fragment>
         )
@@ -93,7 +100,8 @@ const mapStateToProps = state => {
         ings: state.ingrsReducer.ingredients,
         totalPrice: state.ingrsReducer.totalPrice,
         loaded: state.ingrsReducer.loaded,
-        ingsOrder: state.ingrsReducer.ingsOrder
+        ingsOrder: state.ingrsReducer.ingsOrder,
+        isLogged: state.authReducer.logged
     }
 }
 
@@ -102,7 +110,8 @@ const mapDispatchToProps = dispatch => {
         onIngAdd: (ingType) => dispatch({type: actions.ADD_ING, ingType: ingType}),
         onIngRemove: (ingType) => dispatch({type:actions.REMOVE_ING, ingType: ingType}),
         onClear: () => dispatch({type:actions.CLEAR_INGS}),
-        fetchIngredients: () => dispatch(actions.fetchIngredients())
+        fetchIngredients: () => dispatch(actions.fetchIngredients()),
+        onAuthModalShow: () => dispatch(authModalShow())
     }
 }
 

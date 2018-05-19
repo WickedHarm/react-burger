@@ -30,16 +30,19 @@
         align-items: center;
     }
     
-    .NavLi a {
+    .NavLi a,
+    .NavLi span {
         color: white;
         height: 100%;
         padding: 16px 10px;
         border-bottom: 4px solid transparent;
         box-sizing: border-box;
         display: block;
+        cursor: pointer;
     }
     
     .NavLi a:hover,
+    .NavLi span:hover,
     .NavLi a:active,
     .NavLi a.active {
         background-color: #8f5c2c;

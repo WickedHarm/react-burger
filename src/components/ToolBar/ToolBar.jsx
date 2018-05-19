@@ -13,9 +13,10 @@ const ToolBar = (props) => {
             <div className={classes.Desktop}>
                 <Nav />
             </div>
-           
         </header>
     )
 }
+
+
 
 export default ToolBar;

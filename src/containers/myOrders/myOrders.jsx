@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import {Router} from "react-router";
 import axiosOrder from "../../axios-order";
 
 import Order from "./Order/Order";
@@ -6,6 +8,7 @@ import Spinner from "../../components/UI/modal/Spinner/Spinner";
 import Error from "../../components/UI/modal/Error";
 import Modal from "../../components/UI/modal/Modal";
 import Confirm from "../../components/UI/modal/Confirm";
+import {authModalShow} from "../../store/actions/authModalActions";
 
 import classes from "./myOrders.css";
 
@@ -23,16 +26,8 @@ class myOrders extends Component {
         })
     }
 
-    onClearHistory = () => {
-        this.showModalHandler();
-        
-       
-        
-        
-    }
-
     clearHistory = () => {
-        axiosOrder.delete("/orders.json")
+        axiosOrder.delete("/orders.json?auth=" + this.props.token)
         .then( res => {
             this.setState({
                 orders: [],
@@ -51,11 +46,11 @@ class myOrders extends Component {
         this.setState({
             loading:true
         })
-        axiosOrder.get("/orders.json")
+        axiosOrder.get("/orders.json?auth=" + this.props.token)
         .then( ord => {
             let ordersArr = []
             for (let key in ord.data) {
-                //console.log(ord.data[key].ingredientsOrder)
+                
                 ordersArr.push({
                     ingredients: {...ord.data[key].ingredients},
                     ingsOrder: ord.data[key].ingredientsOrder,
@@ -69,19 +64,33 @@ class myOrders extends Component {
                 orders: ordersArr,
                 loading: false
             })
+            
+            
         } )
-        .catch((err) => {this.setState({loading: false})})
+        .catch((err) => {
+            this.setState({loading: false})
+            this.props.onAuthModalShow();
+        })
     }
 
     deleteHandler = (id) => {
-        axiosOrder.delete("/orders/" + id + ".json")
+        axiosOrder.delete("/orders/" + id + ".json?auth=" + this.props.token)
                 .then((res)=> { this.getOrders()})
                 .catch( err => {console.log(err)})
                 
     }
+    componentDidUpdate(prevProps) {
+       if (this.props.token) {
+            if (prevProps.token !== this.props.token && this.props.logged) {
+               this.getOrders();
+               
+            }
+       }
+        
+    }
 
     componentDidMount() {
-       this.getOrders()
+        this.getOrders()
     }
 
     render() {
@@ -90,7 +99,7 @@ class myOrders extends Component {
             <div className={classes.MyOrders}>
                 <Modal show={this.state.modalShow} showModalHandler={this.showModalHandler}>
                     <Confirm onClear={this.clearHistory} showModalHandler={this.showModalHandler}/>
-                </Modal>    
+                </Modal>
                 {this.state.orders.length === 0 ? <h2>You have no orders yet</h2> : null}
                 {this.state.loading ? <Spinner /> : null}
                 {this.state.orders.map( (order) => <Order deleteHandler={this.deleteHandler} key={order.id} order={order}/>)}
@@ -102,4 +111,17 @@ class myOrders extends Component {
     }
 }
 
-export default Error(myOrders, axiosOrder);
+const mapStateToProps = (state) => {
+    return {
+        token: state.authReducer.token,
+        logged: state.authReducer.logged
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onAuthModalShow: () => dispatch(authModalShow())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Error(myOrders, axiosOrder));

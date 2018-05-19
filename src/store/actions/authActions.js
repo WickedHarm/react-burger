@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { authModalShow } from "./authModalActions";
+
 export const AUTH_START = "AUTH_START";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAIL = "AUTH_FAIL";
@@ -14,8 +16,8 @@ export const authStart = () => {
 export const authSuccess = (authData) => {
     return {
         type: AUTH_SUCCESS,
-        authData: authData
-    }
+        authData: authData   
+     }
 }
 
 
@@ -33,7 +35,6 @@ export const authLogout = (expiresIn) => {
                 type: AUTH_LOGOUT,
                 token: null,
                 userId: null
-    
             }
         }, expiresIn * 1000 )
     }
@@ -46,7 +47,6 @@ export const auth = (email, password, isSignIn) => {
         const authPayload = {
             email: email,
             password: password,
-            name: "vasil trojan bojanov",
             returnSecureToken: true
         }
         let url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyBCPEezYoRRjs1M6pGjUT3or5OKWMpa9BY";
@@ -55,8 +55,8 @@ export const auth = (email, password, isSignIn) => {
         }
         axios.post(url, authPayload)
             .then( resp => {
-                console.log(resp);
                 dispatch(authSuccess(resp.data));
+                dispatch(authModalShow())
                 dispatch(authLogout(resp.data.expiresIn))
             })
             .catch( e => {

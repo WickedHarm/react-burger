@@ -1,4 +1,5 @@
 import React from 'react';
+
 import classes from "./BackDrop.css";
 
 const BackDrop = (props) => {
@@ -6,4 +7,5 @@ const BackDrop = (props) => {
    
 }
 
-export default BackDrop
+
+export default BackDrop;

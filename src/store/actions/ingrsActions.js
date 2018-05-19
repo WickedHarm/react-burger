@@ -11,7 +11,7 @@ export const ERROR = "ERROR";
 
 export const fetchIngredients = () => {
     return (dispatch) => {
-        axiosOrder.get("/initial ingr.json")
+        axiosOrder.get("/initIngr.json")
             .then( (resp) => dispatch({
                 type: FETCH_INGS,
                 ings: resp.data.ingrsAmount,

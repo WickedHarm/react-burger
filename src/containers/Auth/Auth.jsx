@@ -7,6 +7,7 @@ import Button from "../../components/UI/Button/Button";
 import Spinner from "../../components/UI/modal/Spinner/Spinner";
 import {inputCreator, validation} from "../../utilities/utility";
 import * as actions from "../../store/actions/authActions";
+import { authModalShow } from "../../store/actions/authModalActions";
 import classes from "./Auth.css";
 
 class Auth extends Component {
@@ -59,6 +60,7 @@ class Auth extends Component {
         this.props.onAuth(formState.email.value, formState.password.value, this.props.modal);
     }
 
+
     render () {
 
        const inputConfig = this.state.form;
@@ -84,7 +86,7 @@ class Auth extends Component {
         className = classes.AuthModal;
         header = <h3>SIGN IN</h3>;
         btnText = "Sign In";
-        signUpLink = <Link to={"/auth"}>or create new account</Link>
+        signUpLink = <Link to={"/auth"} onClick={this.props.onAuthModalShow}>or create new account</Link>
        }
         return (
             <div className={className}>
@@ -118,7 +120,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
    return {
-        onAuth: (email,password, isSignIn) => dispatch(actions.auth(email,password, isSignIn)) 
+        onAuth: (email,password, isSignIn) => dispatch(actions.auth(email,password, isSignIn)),
+        onAuthModalShow: () => dispatch(authModalShow()) 
     }
 }
 
