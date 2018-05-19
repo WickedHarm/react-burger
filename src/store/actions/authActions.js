@@ -31,11 +31,11 @@ export const authFail = (error) => {
 export const authLogout = (expiresIn) => {
     return dispatch => {
         setTimeout( () => {
-            return {
+            dispatch({
                 type: AUTH_LOGOUT,
                 token: null,
                 userId: null
-            }
+            })
         }, expiresIn * 1000 )
     }
     
@@ -62,6 +62,7 @@ export const auth = (email, password, isSignIn) => {
             .catch( e => {
                 console.log(e);
                 dispatch(authFail(e))
+                dispatch(authModalShow())
             })
     }
 }

@@ -1,8 +1,6 @@
 import React, {Fragment, Component} from "react";
-import { connect } from "react-redux";
 
 import BackDrop from "../backdrop/BackDrop";
-import { authModalShow } from "../../../store/actions/authModalActions";
 import classes from "./Modal.css";
 
 class Modal extends Component {

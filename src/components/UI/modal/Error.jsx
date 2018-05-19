@@ -1,17 +1,34 @@
 import React, {Fragment, Component} from "react";
+import { connect } from "react-redux";
+import {compose} from "redux";
 import Modal from "./Modal";
+import { authModalShow } from "../../../store/actions/authModalActions";
 
 
 
 const Error = (OriginalComponent, axios) => {
-   
+//    const OriginalComponent = props[0];
+//    const axios = props[1];
     return class extends Component {
         state = {
             error: null
         }
         componentWillMount () {
-            this.reqInterceptor = axios.interceptors.request.use(req => req, err => {this.setState({error: err}); return Promise.reject(err)} )
-            this.resInterceptor = axios.interceptors.response.use(res => res, err => {this.setState({error: err}); return Promise.reject(err)} )
+            this.reqInterceptor = axios.interceptors.request.use(req => req, err => {
+                console.log("eto req", err);
+                this.setState({error: err});
+                return Promise.reject(err)
+            } )
+            this.resInterceptor = axios.interceptors.response.use(res => res, err => {
+                if (err.response.status !== 401) {
+                    this.setState({error: err}); 
+                }else if (err.response.status === 401) {
+                    this.props.authModalShow();
+                }
+
+                
+                return Promise.reject(err)
+            } )
             
         }
         modalToggle = () => {
@@ -37,4 +54,16 @@ const Error = (OriginalComponent, axios) => {
         }
     }
 }
-export default Error;
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        authModalShow: () => dispatch(authModalShow())
+    }
+}
+
+const composed = compose(
+    connect(null, mapDispatchToProps),
+    Error
+)
+
+export default composed;

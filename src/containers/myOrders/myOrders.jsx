@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {Router} from "react-router";
 import axiosOrder from "../../axios-order";
 
 import Order from "./Order/Order";
@@ -69,7 +68,6 @@ class myOrders extends Component {
         } )
         .catch((err) => {
             this.setState({loading: false})
-            this.props.onAuthModalShow();
         })
     }
 

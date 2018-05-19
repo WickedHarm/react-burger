@@ -6,9 +6,3 @@ export const authModalShow = () => {
         type: AUTH_MODAL_SHOW
     }
 }
-
-export const backdropShow = () => {
-    return {
-        type: BACKDROP_HIDE
-    }
-}

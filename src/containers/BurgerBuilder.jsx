@@ -8,7 +8,6 @@ import OrderSum from "../components/Burger/OrderSum";
 import Modal from "../components/UI/modal/Modal";
 import Spinner from "../components/UI/modal/Spinner/Spinner";
 import axiosOrder from "../axios-order";
-import Auth from "../containers/Auth/Auth";
 import * as actions from "../store/actions/ingrsActions";
 import {authModalShow} from "../store/actions/authModalActions";
 
