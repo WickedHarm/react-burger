@@ -85,7 +85,7 @@ class BurgerBuilder extends Component {
                      addIng={this.props.onIngAdd} 
                      deleteIng={this.props.onIngRemove} 
                      disabled={disabled} 
-                     price={this.props.totalPrice} 
+                     price={this.props.totalPrice.toFixed(2)} 
                      orderBtn={this.orderBtnToggle(this.props.ings)}
                      showModal={orderNowMethod}
                      clearOrder={this.props.onClear}/>   

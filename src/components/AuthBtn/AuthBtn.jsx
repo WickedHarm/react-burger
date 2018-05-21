@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 
+import { authLogout } from "../../store/actions/authActions";
 import { authModalShow } from "../../store/actions/authModalActions";
 import Modal from "../UI/modal/Modal";
 import Auth from "../../containers/Auth/Auth";
@@ -11,11 +12,24 @@ class AuthBtn extends Component {
         modalShow: false
     }
     render() {
+
+        let btn = (
+            <li className={navLiClasses.NavLi} onClick={this.props.onAuthModalShow}>
+                    <span>Sign In</span>
+            </li>
+        )
+
+        if (this.props.isLogged) {
+            btn = (
+                <li className={navLiClasses.NavLi} onClick={this.props.onLogout}>
+                    <span>Logout</span>
+                </li>
+            )
+        }
+
         return (
             <Fragment>
-                <li className={navLiClasses.NavLi} onClick={this.props.onAuthModalShow}>
-                    <span>Sign In</span>
-                </li>
+                {btn}
                 <Modal show={this.props.showAuth} showModalHandler={this.props.onAuthModalShow}>
                     <Auth modal showModalHandler={this.props.onAuthModalShow}/>
                 </Modal>
@@ -26,13 +40,15 @@ class AuthBtn extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        showAuth: state.authModalReducer.showAuthModal
+        showAuth: state.authModalReducer.showAuthModal,
+        isLogged: state.authReducer.logged
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAuthModalShow: () => dispatch(authModalShow())
+        onAuthModalShow: () => dispatch(authModalShow()),
+        onLogout: () => dispatch(authLogout())
     }
 }
 

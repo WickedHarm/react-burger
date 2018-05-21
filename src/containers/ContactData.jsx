@@ -17,7 +17,7 @@ class ContactData extends Component {
         loading: false,
         orderForm: {
             name: inputCreator("input", "text", "Your Name", {minLength: 3, maxLength: 15}),
-            email: inputCreator("input", "email", "Your E-Mail", {reg: /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i}),
+            email: inputCreator("input", "email", "Your E-Mail", {reg: /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i}, this.props.userEmail),
             street: inputCreator("input", "text", "Your Address", {minLength: 3, maxLength: 20}),
             postCode: inputCreator("input", "text", "Your Post Code", {minLength: 5, maxLength: 5}),
             deliveryMethod: inputCreator("select", "select", "Fastest"),
@@ -39,11 +39,11 @@ class ContactData extends Component {
             
             
         }
-        
+        let price = parseFloat(this.props.price).toFixed(2);
         let order = {
             ingredients: {...this.props.ings},
             ingredientsOrder: [...this.props.ingsOrder],
-            price: this.props.price,
+            price: price,
             contactData: contactData,
             date: this.getDate()
         }
@@ -138,7 +138,8 @@ const mapStateToProps = (state) => {
         ings: state.ingrsReducer.ingredients,
         ingsOrder: state.ingrsReducer.ingsOrder,
         price: state.ingrsReducer.totalPrice,
-        token: state.authReducer.token
+        token: state.authReducer.token,
+        userEmail: state.authReducer.userEmail
     }
 } 
 

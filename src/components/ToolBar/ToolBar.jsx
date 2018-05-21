@@ -10,9 +10,7 @@ const ToolBar = (props) => {
         <header className={classes.ToolBar}>
             <MenuBtn clickHandler={props.clickHandler}/>
             <Logo sizeH="80%"/>
-            <div className={classes.Desktop}>
-                <Nav />
-            </div>
+            <Nav />
         </header>
     )
 }

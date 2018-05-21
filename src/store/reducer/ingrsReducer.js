@@ -29,7 +29,7 @@ const ingrsReducer = ( state = initialState, action) => {
         case actions.FETCH_INGS:
         let price = state.totalPrice;
             for (let key in action.ings) {
-                price += (prices[key] * action.ings[key]);
+                price += prices[key] * action.ings[key];
                 
             }
          

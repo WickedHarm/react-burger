@@ -14,7 +14,7 @@ let menu = [
 const ControlPanel = (props) => (
     <div className={classes.BuildControls}>
     
-        <p>Current Price: {props.price.toFixed(2)}</p>
+        <p>Current Price: {props.price} USD</p>
         {menu.map( item => (
             <Control addIng={() => props.addIng(item.type)} deleteIng={ () => props.deleteIng(item.type)} key={item.label} label={item.label} disabled={props.disabled[item.type]}/>
         ) )}

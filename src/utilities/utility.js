@@ -24,8 +24,8 @@ export const validation = (key, value, rules) => {
     
 }
 
-export const inputCreator = (switchType, elType, placeHolder, validationRules) => {
-       
+export const inputCreator = (switchType, elType, placeHolder, validationRules, value) => {
+    
     let formBody = {
          elementType: switchType,
          elementConfig: {
@@ -44,6 +44,11 @@ export const inputCreator = (switchType, elType, placeHolder, validationRules) =
      }
      if (placeHolder === "Fastest") {
          formBody.value = placeHolder
+    }
+    if (value) {
+        formBody.value = value;
+        formBody.validation.isValid = true;
+        formBody.validation.touched = true;
     }
      return formBody
  }

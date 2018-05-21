@@ -1,7 +1,7 @@
 import React, {Fragment, Component} from "react";
+
 import classes from "./Layout.css"
 import ToolBar from "../ToolBar/ToolBar";
-import Side from "../Nav/Side/Side";
 
 class Layout extends Component {
     state = {
@@ -23,7 +23,6 @@ class Layout extends Component {
         return (
             <Fragment>
                 <ToolBar clickHandler={this.clickHandler}/>
-                <Side show={this.state.showBackdrop} hideBackdrop={this.hideBackdrop}/>
                 <main className={classes.Content}>
                     {this.props.children}
                 </main>
@@ -31,5 +30,6 @@ class Layout extends Component {
         )
     }
 }
+
 
 export default Layout;

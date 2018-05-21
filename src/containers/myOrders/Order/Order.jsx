@@ -20,6 +20,7 @@ const order = (props) => {
             
             
         } );
+        
     let price = parseFloat(props.order.price).toFixed(2);
     
     return(

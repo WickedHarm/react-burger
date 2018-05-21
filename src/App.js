@@ -11,12 +11,14 @@ import myOrders from "./containers/myOrders/myOrders";
 import Success from './components/Success/Success';
 import Auth from "./containers/Auth/Auth";
 
+import classes from "./App.css";
+
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <div className={classes.App}>
           <Layout>
             <Route path="/" exact component={BurgerBuilder} />
             <Route path="/checkout" component={Checkout} />

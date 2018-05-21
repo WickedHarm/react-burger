@@ -7,15 +7,18 @@
     padding: 0;
     list-style: none;
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
     align-items: center;
     height: 100%;
 
 }
 
-@media (min-width: 500px) {
+@media (max-width: 450px) {
+    .Nav {
+        width: 100%;
+    }
     .Nav ul {
-       flex-flow: row;
+        justify-content: space-between;
     }
 }
 

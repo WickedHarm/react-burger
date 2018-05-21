@@ -28,14 +28,18 @@ export const authFail = (error) => {
     }
 }
 
-export const authLogout = (expiresIn) => {
+export const authLogout = () => {
+    return {
+        type: AUTH_LOGOUT,
+        token: null,
+        userId: null
+    }
+}
+
+export const authTimeoutLogout = (expiresIn) => {
     return dispatch => {
         setTimeout( () => {
-            dispatch({
-                type: AUTH_LOGOUT,
-                token: null,
-                userId: null
-            })
+            dispatch(authLogout())
         }, expiresIn * 1000 )
     }
     
@@ -56,8 +60,10 @@ export const auth = (email, password, isSignIn) => {
         axios.post(url, authPayload)
             .then( resp => {
                 dispatch(authSuccess(resp.data));
-                dispatch(authModalShow())
-                dispatch(authLogout(resp.data.expiresIn))
+                if (isSignIn) {
+                    dispatch(authModalShow());
+                }
+                dispatch(authTimeoutLogout(resp.data.expiresIn));
             })
             .catch( e => {
                 console.log(e);

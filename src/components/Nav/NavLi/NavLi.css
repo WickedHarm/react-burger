@@ -1,53 +1,43 @@
+
 .NavLi {
-    margin: 10px 0;
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
+    margin: 0;
+    display: flex;
+    height: 100%;
+    width: auto;
+    align-items: center;
 }
 
-.NavLi a {
-    color: #8f5c2c;
-    text-decoration: none;
-    width: 100%;
+.NavLi a,
+.NavLi span {
+    color: white;
+    height: 100%;
+    padding: 16px 10px;
+    border-bottom: 4px solid transparent;
     box-sizing: border-box;
     display: block;
+    cursor: pointer;
 }
 
 .NavLi a:hover,
+.NavLi span:hover,
 .NavLi a:active,
 .NavLi a.active {
-    
-    color: #40a4c8; 
+    background-color: #8f5c2c;
+    border-bottom: 4px solid #40a4c8;
+    color: white; 
 }
 
+.Main {
+    margin-right: auto;
+}
 
-@media (min-width: 500px) {
+@media (max-width: 450px) {
     .NavLi {
-        margin: 0;
-        display: flex;
-        height: 100%;
-        width: auto;
-        align-items: center;
+        /* border: 1px solid white; */
     }
-    
+
     .NavLi a,
     .NavLi span {
-        color: white;
-        height: 100%;
-        padding: 16px 10px;
-        border-bottom: 4px solid transparent;
-        box-sizing: border-box;
-        display: block;
-        cursor: pointer;
-    }
-    
-    .NavLi a:hover,
-    .NavLi span:hover,
-    .NavLi a:active,
-    .NavLi a.active {
-        background-color: #8f5c2c;
-        border-bottom: 4px solid #40a4c8;
-        color: white; 
+        text-decoration: none;
     }
 }
-

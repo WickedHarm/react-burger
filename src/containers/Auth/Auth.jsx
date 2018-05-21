@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import Input from "../../components/UI/input/Input";
 import Button from "../../components/UI/Button/Button";
@@ -86,10 +86,11 @@ class Auth extends Component {
         className = classes.AuthModal;
         header = <h3>SIGN IN</h3>;
         btnText = "Sign In";
-        signUpLink = <Link to={"/auth"} onClick={this.props.onAuthModalShow}>or create new account</Link>
+        signUpLink = <Link to={"/auth"} onClick={this.props.onAuthModalShow}>or create a new account</Link>
        }
         return (
             <div className={className}>
+                { this.props.isLogged ? <Redirect to="/" /> : null}
                 {header}
                 {this.props.loading ? 
                     <Spinner />
@@ -114,7 +115,8 @@ class Auth extends Component {
 const mapStateToProps = (state) => {
     return {
         loading: state.authReducer.loading,
-        error: state.authReducer.error
+        error: state.authReducer.error,
+        isLogged: state.authReducer.logged
     }
 }
 
