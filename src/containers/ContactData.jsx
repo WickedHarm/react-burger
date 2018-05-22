@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import axiosOrder from "../axios-order";
 import {withRouter} from "react-router-dom";
 import { connect } from "react-redux";
+import { axiosContactData } from "../axiosInstance";
 
 import Button from "../components/UI/Button/Button";
 import Spinner from "../components/UI/modal/Spinner/Spinner";
@@ -50,12 +50,15 @@ class ContactData extends Component {
 
         const token = this.props.token;
 
-        axiosOrder.post("/orders.json?auth=" + token, order)
+        axiosContactData.post("/orders.json?auth=" + token, order)
             .then( () => {
                 this.setState({loading:false})
                 this.props.history.replace("/success");
             } )
-            .catch( (error)=> this.setState({loading:false}) )
+            .catch( (error)=>{ 
+                console.log("eto order error")
+                this.setState({loading:false})
+            } )
     }
 
     changeHandler = (e, key) => {
@@ -143,4 +146,4 @@ const mapStateToProps = (state) => {
     }
 } 
 
-export default connect(mapStateToProps)(withRouter(Error(ContactData, axiosOrder)));
+export default connect(mapStateToProps)(withRouter(Error(ContactData, axiosContactData)));

@@ -15,16 +15,21 @@ const Error = (OriginalComponent, axios) => {
         }
         componentWillMount () {
             this.reqInterceptor = axios.interceptors.request.use(req => req, err => {
-                console.log("eto req", err);
                 this.setState({error: err});
                 return Promise.reject(err)
             } )
             this.resInterceptor = axios.interceptors.response.use(res => res, err => {
-                if (err.response.status !== 401) {
-                    this.setState({error: err}); 
-                }else if (err.response.status === 401) {
-                    this.props.authModalShow();
+                if (err.response) {
+                    if (err.response.status !== 401) {
+                        
+                        this.setState({error: err}); 
+                    }else if (err.response.status === 401) {
+                        this.props.authModalShow();
+                    }
+                }else {
+                    this.setState({error: err})
                 }
+               
 
                 
                 return Promise.reject(err)
@@ -42,11 +47,18 @@ const Error = (OriginalComponent, axios) => {
         }
 
         render() {
-           
+            let message = null;
+            if (this.state.error) {
+                message = this.state.error.message;
+                if (this.state.error.response.data.error.code === 400) {
+                    message = this.state.error.response.data.error.message;
+                };
+            }
+            
             return( 
                 <Fragment>
                     <Modal show={this.state.error} showModalHandler={this.modalToggle}>
-                        {this.state.error ? <h3>{this.state.error.message}</h3> : null }
+                        {this.state.error ? <h3>{message}</h3> : null }
                     </Modal>
                     <OriginalComponent {...this.props}/>
                 </Fragment>

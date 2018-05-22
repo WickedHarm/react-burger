@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axiosOrder from "../../axios-order";
+import { axiosMyOrders } from "../../axiosInstance";
 
 import Order from "./Order/Order";
 import Spinner from "../../components/UI/modal/Spinner/Spinner";
@@ -26,7 +26,7 @@ class myOrders extends Component {
     }
 
     clearHistory = () => {
-        axiosOrder.delete("/orders.json?auth=" + this.props.token)
+        axiosMyOrders.delete("/orders.json?auth=" + this.props.token)
         .then( res => {
             this.setState({
                 orders: [],
@@ -45,7 +45,7 @@ class myOrders extends Component {
         this.setState({
             loading:true
         })
-        axiosOrder.get("/orders.json?auth=" + this.props.token)
+        axiosMyOrders.get("/orders.json?auth=" + this.props.token)
         .then( ord => {
             let ordersArr = []
             for (let key in ord.data) {
@@ -72,7 +72,7 @@ class myOrders extends Component {
     }
 
     deleteHandler = (id) => {
-        axiosOrder.delete("/orders/" + id + ".json?auth=" + this.props.token)
+        axiosMyOrders.delete("/orders/" + id + ".json?auth=" + this.props.token)
                 .then((res)=> { this.getOrders()})
                 .catch( err => {console.log(err)})
                 
@@ -122,4 +122,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Error(myOrders, axiosOrder));
+export default connect(mapStateToProps, mapDispatchToProps)(Error(myOrders, axiosMyOrders));

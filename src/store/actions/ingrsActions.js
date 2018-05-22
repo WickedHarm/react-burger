@@ -1,4 +1,4 @@
-import axiosOrder from "../../axios-order";
+import { axiosOrder } from "../../axiosInstance";
 
 
 export const ADD_ING = "ADD_ING";

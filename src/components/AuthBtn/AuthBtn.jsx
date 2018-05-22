@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import { authLogout } from "../../store/actions/authActions";
 import { authModalShow } from "../../store/actions/authModalActions";
 import Modal from "../UI/modal/Modal";
 import Auth from "../../containers/Auth/Auth";
+import Error from "../UI/modal/Error";
 import navLiClasses from "../Nav/NavLi/NavLi.css";
 
 class AuthBtn extends Component {
@@ -53,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthBtn);
+export default connect(mapStateToProps, mapDispatchToProps)(Error(AuthBtn, axios));

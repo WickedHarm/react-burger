@@ -81,16 +81,18 @@ class Auth extends Component {
        let header = <h3>SIGN UP</h3>
        let btnText = "Sign Up";
        let signUpLink = null;
+       let redirect = this.props.isLogged ? <Redirect to="/" /> : null;
 
        if (isModal) {
         className = classes.AuthModal;
         header = <h3>SIGN IN</h3>;
         btnText = "Sign In";
-        signUpLink = <Link to={"/auth"} onClick={this.props.onAuthModalShow}>or create a new account</Link>
-       }
+        signUpLink = <Link to={"/auth"} onClick={this.props.onAuthModalShow}>or create a new account</Link>;
+        redirect = null;
+        }
         return (
             <div className={className}>
-                { this.props.isLogged ? <Redirect to="/" /> : null}
+                {redirect}
                 {header}
                 {this.props.loading ? 
                     <Spinner />
@@ -128,4 +130,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Auth);
-

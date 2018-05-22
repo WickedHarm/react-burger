@@ -4,6 +4,7 @@ import { authModalShow } from "./authModalActions";
 
 export const AUTH_START = "AUTH_START";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_SIGNUP = "AUTH_SIGNUP";
 export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
@@ -19,6 +20,8 @@ export const authSuccess = (authData) => {
         authData: authData   
      }
 }
+
+
 
 
 export const authFail = (error) => {
@@ -45,6 +48,12 @@ export const authTimeoutLogout = (expiresIn) => {
     
 }
 
+export const authSignUpRedirect = () => {
+    return {
+        type: AUTH_SIGNUP
+    }
+}
+
 export const auth = (email, password, isSignIn) => {
     return dispatch => {
         dispatch(authStart());
@@ -66,9 +75,13 @@ export const auth = (email, password, isSignIn) => {
                 dispatch(authTimeoutLogout(resp.data.expiresIn));
             })
             .catch( e => {
-                console.log(e);
                 dispatch(authFail(e))
-                dispatch(authModalShow())
+                if (isSignIn) {
+                    dispatch(authModalShow())
+                }
+                
             })
     }
 }
+
+
