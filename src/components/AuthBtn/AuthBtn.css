@@ -1,0 +1,23 @@
+.AuthBtn {
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.AuthBtn i {
+   
+   font-size: 14px;
+   color: rgb(183, 231, 236);
+}
+
+@media (max-width: 499px) {
+    .AuthBtn span {
+        display: block;
+        padding-top: 10px; 
+    }
+    
+    .AuthBtn i {
+        display: block;
+        font-size: .7em;
+    }
+}

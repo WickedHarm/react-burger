@@ -8,6 +8,7 @@ import Modal from "../UI/modal/Modal";
 import Auth from "../../containers/Auth/Auth";
 import Error from "../UI/modal/Error";
 import navLiClasses from "../Nav/NavLi/NavLi.css";
+import classes from "./AuthBtn.css";
 
 class AuthBtn extends Component {
     state = {
@@ -22,9 +23,11 @@ class AuthBtn extends Component {
         )
 
         if (this.props.isLogged) {
+            const userblockClasses = [navLiClasses.NavLi, classes.AuthBtn].join(" ");
+            let email = this.props.userEmail.slice(null, this.props.userEmail.indexOf('@'));
             btn = (
-                <li className={navLiClasses.NavLi} onClick={this.props.onLogout}>
-                    <span>Logout</span>
+                <li className={userblockClasses} onClick={this.props.onLogout}>
+                    <span><i>{email}</i> Logout</span>
                 </li>
             )
         }
@@ -43,6 +46,7 @@ class AuthBtn extends Component {
 const mapStateToProps = (state) => {
     return {
         showAuth: state.authModalReducer.showAuthModal,
+        userEmail: state.authReducer.userEmail,
         isLogged: state.authReducer.logged
     }
 }

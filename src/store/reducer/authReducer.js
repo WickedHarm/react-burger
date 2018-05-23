@@ -3,6 +3,7 @@ import * as actions from "../actions/authActions";
 const initialState = {
     token: null,
     userId: null,
+    userEmail: null,
     error: null,
     loading: false,
     logged: false
@@ -37,10 +38,11 @@ const authReducer = (state=initialState, action) => {
             }
 
         case actions.AUTH_LOGOUT:
-        console.log("eto logout", action)
+        console.log("eto logout reducer", action)
             return {
                 token: action.token,
                 userId: action.userId,
+                userEmail: action.userEmail,
                 logged: false
             }    
 

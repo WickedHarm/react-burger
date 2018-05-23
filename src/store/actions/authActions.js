@@ -32,14 +32,20 @@ export const authFail = (error) => {
 }
 
 export const authLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("expiresIn");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("userId");
     return {
         type: AUTH_LOGOUT,
         token: null,
-        userId: null
+        userId: null,
+        userEmail: null
     }
 }
 
 export const authTimeoutLogout = (expiresIn) => {
+    console.log("eto logout", expiresIn);
     return dispatch => {
         setTimeout( () => {
             dispatch(authLogout())
@@ -51,6 +57,29 @@ export const authTimeoutLogout = (expiresIn) => {
 export const authSignUpRedirect = () => {
     return {
         type: AUTH_SIGNUP
+    }
+}
+
+export const authCheckState = () => {
+    return dispatch => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            dispatch(authLogout());
+        }else {
+            const expiresIn = localStorage.getItem("expiresIn");
+            const email = localStorage.getItem("userEmail");
+            const userId = localStorage.getItem("userId");
+            if (expiresIn > Date.now()) {
+                dispatch(authSuccess({
+                    idToken: token,
+                    email: email,
+                    localId: userId
+                    }));
+                dispatch(authTimeoutLogout( (expiresIn - Date.now()) / 1000 ));
+            }else {
+                dispatch(authLogout())
+            }
+        }
     }
 }
 
@@ -72,6 +101,12 @@ export const auth = (email, password, isSignIn) => {
                 if (isSignIn) {
                     dispatch(authModalShow());
                 }
+                console.log( resp.data)
+                localStorage.setItem("token", resp.data.idToken);
+                const expiresTime = Date.now() + resp.data.expiresIn * 1000; 
+                localStorage.setItem("expiresIn", expiresTime);
+                localStorage.setItem("userEmail", resp.data.email);
+                localStorage.setItem("userId", resp.data.localId);
                 dispatch(authTimeoutLogout(resp.data.expiresIn));
             })
             .catch( e => {

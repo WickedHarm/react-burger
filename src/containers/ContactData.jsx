@@ -41,6 +41,7 @@ class ContactData extends Component {
         }
         let price = parseFloat(this.props.price).toFixed(2);
         let order = {
+            userId: this.props.userId,
             ingredients: {...this.props.ings},
             ingredientsOrder: [...this.props.ingsOrder],
             price: price,
@@ -103,7 +104,7 @@ class ContactData extends Component {
     render() {
        const inputConfig = this.state.orderForm;
        const inputsArr = [];
-       
+       console.log(this.props.userId);
        for (let key in inputConfig) {
            
            inputsArr.push(<Input key={key} 
@@ -142,7 +143,8 @@ const mapStateToProps = (state) => {
         ingsOrder: state.ingrsReducer.ingsOrder,
         price: state.ingrsReducer.totalPrice,
         token: state.authReducer.token,
-        userEmail: state.authReducer.userEmail
+        userEmail: state.authReducer.userEmail,
+        userId: state.authReducer.userId,
     }
 } 
 

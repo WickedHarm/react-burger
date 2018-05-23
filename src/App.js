@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import {BrowserRouter} from "react-router-dom";
 import {Route} from "react-router-dom";
 
@@ -10,11 +11,17 @@ import Checkout from './containers/Checkout';
 import myOrders from "./containers/myOrders/myOrders";
 import Success from './components/Success/Success';
 import Auth from "./containers/Auth/Auth";
+import { authCheckState } from "./store/actions/authActions";
 
 import classes from "./App.css";
 
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.onAutoLogin();
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -32,4 +39,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAutoLogin: () => dispatch(authCheckState())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);

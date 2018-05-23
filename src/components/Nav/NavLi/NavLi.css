@@ -1,5 +1,6 @@
 
 .NavLi {
+    position: relative;
     margin: 0;
     display: flex;
     height: 100%;
@@ -32,10 +33,6 @@
 }
 
 @media (max-width: 450px) {
-    .NavLi {
-        /* border: 1px solid white; */
-    }
-
     .NavLi a,
     .NavLi span {
         text-decoration: none;
