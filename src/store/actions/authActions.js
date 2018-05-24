@@ -91,9 +91,9 @@ export const auth = (email, password, isSignIn) => {
             password: password,
             returnSecureToken: true
         }
-        let url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyBCPEezYoRRjs1M6pGjUT3or5OKWMpa9BY";
+        let url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=" + process.env.REACT_APP_AUTH_API_KEY;
         if (isSignIn) {
-            url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyBCPEezYoRRjs1M6pGjUT3or5OKWMpa9BY";
+            url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=" + process.env.REACT_APP_AUTH_API_KEY;
         }
         axios.post(url, authPayload)
             .then( resp => {

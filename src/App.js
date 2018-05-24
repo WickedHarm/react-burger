@@ -44,5 +44,5 @@ const mapDispatchToProps = (dispatch) => {
     onAutoLogin: () => dispatch(authCheckState())
   }
 }
-
+console.log(process.env.REACT_APP_AUTH_API_KEY)
 export default connect(null, mapDispatchToProps)(App);
