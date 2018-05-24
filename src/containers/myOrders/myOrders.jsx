@@ -14,6 +14,7 @@ import classes from "./myOrders.css";
 class myOrders extends Component {
     state = {
         loading: false,
+        loaded: null,
         orders: [],
         modalShow: false
     }
@@ -43,9 +44,10 @@ class myOrders extends Component {
 
     getOrders() {
         this.setState({
-            loading:true
+            loading:true,
+            loaded: false
         })
-        console.log(this.props.token, this.props.userId)
+        
         const queryParams = '?auth=' + this.props.token + '&orderBy="userId"&equalTo="' + this.props.userId + '"';
         axiosMyOrders.get("/orders.json" + queryParams)
         .then( ord => {
@@ -63,13 +65,17 @@ class myOrders extends Component {
             }
             this.setState({
                 orders: ordersArr,
-                loading: false
+                loading: false,
+                loaded: true
             })
             
             
         } )
         .catch((err) => {
-            this.setState({loading: false})
+            this.setState({
+                loading: false,
+                loaded: false
+            })
         })
     }
 
@@ -79,6 +85,7 @@ class myOrders extends Component {
                 .catch( err => {console.log(err)})
                 
     }
+
     componentDidUpdate(prevProps) {
        if (this.props.token) {
             if (prevProps.token !== this.props.token && this.props.logged) {
@@ -90,11 +97,10 @@ class myOrders extends Component {
     }
 
     componentDidMount() {
-        this.getOrders()
+        this.getOrders();
     }
 
     render() {
-        
         return(
             <div className={classes.MyOrders}>
                 <Modal show={this.state.modalShow} showModalHandler={this.showModalHandler}>

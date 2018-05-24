@@ -12,14 +12,12 @@ const initialState = {
 const authReducer = (state=initialState, action) => {
     switch (action.type) {
         case actions.AUTH_START:
-        console.log("eto auth-start", action)
             return {
                 error: false,
                 loading: true
             }
 
-        case actions.AUTH_SUCCESS:
-        console.log("eto auth-success", action)   
+        case actions.AUTH_SUCCESS: 
             return {
                 token: action.authData.idToken,
                 userId: action.authData.localId,
@@ -29,8 +27,7 @@ const authReducer = (state=initialState, action) => {
                 logged: true
             }
 
-        case actions.AUTH_FAIL: 
-        console.log("eto auth-fail")
+        case actions.AUTH_FAIL:
             return {
                 error: action.error,
                 loading: false,
@@ -38,7 +35,6 @@ const authReducer = (state=initialState, action) => {
             }
 
         case actions.AUTH_LOGOUT:
-        console.log("eto logout reducer", action)
             return {
                 token: action.token,
                 userId: action.userId,

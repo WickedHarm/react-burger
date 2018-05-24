@@ -104,7 +104,6 @@ class ContactData extends Component {
     render() {
        const inputConfig = this.state.orderForm;
        const inputsArr = [];
-       console.log(this.props.userId);
        for (let key in inputConfig) {
            
            inputsArr.push(<Input key={key} 

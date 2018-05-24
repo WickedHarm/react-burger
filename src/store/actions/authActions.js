@@ -45,7 +45,6 @@ export const authLogout = () => {
 }
 
 export const authTimeoutLogout = (expiresIn) => {
-    console.log("eto logout", expiresIn);
     return dispatch => {
         setTimeout( () => {
             dispatch(authLogout())
@@ -76,6 +75,7 @@ export const authCheckState = () => {
                     localId: userId
                     }));
                 dispatch(authTimeoutLogout( (expiresIn - Date.now()) / 1000 ));
+                
             }else {
                 dispatch(authLogout())
             }
@@ -101,7 +101,7 @@ export const auth = (email, password, isSignIn) => {
                 if (isSignIn) {
                     dispatch(authModalShow());
                 }
-                console.log( resp.data)
+                
                 localStorage.setItem("token", resp.data.idToken);
                 const expiresTime = Date.now() + resp.data.expiresIn * 1000; 
                 localStorage.setItem("expiresIn", expiresTime);

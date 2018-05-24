@@ -13,6 +13,5 @@ import reducer from "./store/reducer/index";
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
-
 ReactDOM.render( <Provider store={store}><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();

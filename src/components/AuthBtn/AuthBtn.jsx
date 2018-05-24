@@ -14,6 +14,7 @@ class AuthBtn extends Component {
     state = {
         modalShow: false
     }
+
     render() {
 
         let btn = (

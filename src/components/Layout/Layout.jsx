@@ -7,6 +7,7 @@ class Layout extends Component {
     state = {
         showBackdrop: false
     }
+
     hideBackdrop = () => {
         
         this.setState({
