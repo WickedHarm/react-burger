@@ -2,12 +2,12 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
-import { authLogout } from "../../store/actions/authActions";
-import { authModalShow } from "../../store/actions/authModalActions";
-import Modal from "../UI/modal/Modal";
-import Auth from "../../containers/Auth/Auth";
-import Error from "../UI/modal/Error";
-import navLiClasses from "../Nav/NavLi/NavLi.css";
+import { authLogout } from "../../../store/actions/authActions";
+import { authModalShow } from "../../../store/actions/authModalActions";
+import Modal from "../../../components/UI/modal/Modal";
+import Auth from "../../Auth/Auth";
+import Error from "../../../components/UI/modal/Error";
+import navLiClasses from "../../../components/Nav/NavLi/NavLi.css";
 import classes from "./AuthBtn.css";
 
 class AuthBtn extends Component {
@@ -25,7 +25,7 @@ class AuthBtn extends Component {
 
         if (this.props.isLogged) {
             const userblockClasses = [navLiClasses.NavLi, classes.AuthBtn].join(" ");
-            let email = this.props.userEmail.slice(null, this.props.userEmail.indexOf('@'));
+            const email = this.props.userEmail.slice(null, this.props.userEmail.indexOf('@'));
             btn = (
                 <li className={userblockClasses} onClick={this.props.onLogout}>
                     <span><i>{email}</i> Logout</span>

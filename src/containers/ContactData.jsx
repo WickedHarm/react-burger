@@ -25,22 +25,22 @@ class ContactData extends Component {
         }
     
     getDate() {
-        let date = new Date().toLocaleString("ru-RU", {hour12: false});
+        const date = new Date().toLocaleString("ru-RU", {hour12: false});
         return date;
     }
 
     orderHandler = (e, select) =>{
         e.preventDefault();
         this.setState({loading: true})
-        let contactData = {};
+        const contactData = {};
         
         for (let key in  this.state.orderForm) {
            contactData[key] = this.state.orderForm[key].value;
             
             
         }
-        let price = parseFloat(this.props.price).toFixed(2);
-        let order = {
+        const price = parseFloat(this.props.price).toFixed(2);
+        const order = {
             userId: this.props.userId,
             ingredients: {...this.props.ings},
             ingredientsOrder: [...this.props.ingsOrder],
@@ -64,17 +64,17 @@ class ContactData extends Component {
 
     changeHandler = (e, key) => {
         
-        let obj = Object.assign(this.state.orderForm);
+        const obj = Object.assign(this.state.orderForm);
         obj[key].value = e.target.value;
         
-        let rules = obj[key].validation.rules;
-        let value = obj[key].value;
+        const rules = obj[key].validation.rules;
+        const value = obj[key].value;
         
         if (rules) {
             obj[key].validation.isValid = validation(key, value, rules);
             
         }
-        let arr = [];
+        const arr = [];
         for (let i in obj) {
             
            arr.push(obj[i].validation.isValid);

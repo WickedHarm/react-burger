@@ -21,8 +21,8 @@ class BurgerBuilder extends Component {
     }
   
     orderBtnToggle(ingredients) {
-        let arr = Object.keys(ingredients).map( item => ingredients[item]);
-        let isDisabled = arr.some( num => num > 0 )
+        const arr = Object.keys(ingredients).map( item => ingredients[item]);
+        const isDisabled = arr.some( num => num > 0 )
         
 
         return !isDisabled

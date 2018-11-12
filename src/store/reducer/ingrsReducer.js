@@ -51,7 +51,7 @@ const ingrsReducer = ( state = initialState, action) => {
             }    
 
         case actions.ADD_ING:
-            let newIngsOrder = [...state.ingsOrder];
+            const newIngsOrder = [...state.ingsOrder];
             newIngsOrder.push(action.ingType);
 
             return {
@@ -65,8 +65,8 @@ const ingrsReducer = ( state = initialState, action) => {
             };
          
         case actions.REMOVE_ING:
-            let newIngsOrderRemove = [...state.ingsOrder];
-            let removeIndex = newIngsOrderRemove.lastIndexOf(action.ingType);
+            const newIngsOrderRemove = [...state.ingsOrder];
+            const removeIndex = newIngsOrderRemove.lastIndexOf(action.ingType);
             
             if (removeIndex > -1) {
                 newIngsOrderRemove.splice(removeIndex, 1);

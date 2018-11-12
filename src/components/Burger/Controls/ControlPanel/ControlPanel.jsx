@@ -4,7 +4,7 @@ import React from "react";
 import Control from "../Control"
 import classes from "./ControlPanel.css";
 
-let menu = [
+const menu = [
     {label: "Salad", type: "salad"},
     {label: "Bacon", type: "bacon"},
     {label: "Cheese", type: "cheese"},

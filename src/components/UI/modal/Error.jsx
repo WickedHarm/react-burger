@@ -7,8 +7,6 @@ import { authModalShow } from "../../../store/actions/authModalActions";
 
 
 const Error = (OriginalComponent, axios) => {
-//    const OriginalComponent = props[0];
-//    const axios = props[1];
     return class extends Component {
         state = {
             error: null

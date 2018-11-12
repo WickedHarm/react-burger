@@ -26,7 +26,7 @@ export const validation = (key, value, rules) => {
 
 export const inputCreator = (switchType, elType, placeHolder, validationRules, value) => {
     
-    let formBody = {
+    const formBody = {
          elementType: switchType,
          elementConfig: {
              type: elType,

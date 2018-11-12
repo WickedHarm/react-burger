@@ -22,17 +22,17 @@ class Auth extends Component {
 
     changeHandler = (e, key) => {
         
-        let obj = Object.assign(this.state.form);
+        const obj = Object.assign(this.state.form);
         obj[key].value = e.target.value;
         
-        let rules = obj[key].validation.rules;
-        let value = obj[key].value;
+        const rules = obj[key].validation.rules;
+        const value = obj[key].value;
         
         if (rules) {
             obj[key].validation.isValid = validation(key, value, rules);
             
         }
-        let arr = [];
+        const arr = [];
         for (let i in obj) {
             
            arr.push(obj[i].validation.isValid);

@@ -3,7 +3,7 @@ import Button from "../UI/Button/Button";
 
 
 const OrderSum = (props) => {
-    let arr = Object.keys(props.ingredients).map( item => <li key={item} style={{textTransform: "uppercase"}}>{item}: {props.ingredients[item]} </li>)
+    const arr = Object.keys(props.ingredients).map( item => <li key={item} style={{textTransform: "uppercase"}}>{item}: {props.ingredients[item]} </li>)
 
     return (
         <Fragment>

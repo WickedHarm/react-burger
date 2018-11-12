@@ -17,7 +17,7 @@ class Checkout extends Component {
     }
    
     render() {
-        let orderIsEmpty = Object.keys(this.props.ings).map( key => this.props.ings[key] ).every( item => item === 0 );
+        const orderIsEmpty = Object.keys(this.props.ings).map( key => this.props.ings[key] ).every( item => item === 0 );
         
         return (
             <div>

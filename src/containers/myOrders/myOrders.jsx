@@ -51,7 +51,7 @@ class myOrders extends Component {
         const queryParams = '?auth=' + this.props.token + '&orderBy="userId"&equalTo="' + this.props.userId + '"';
         axiosMyOrders.get("/orders.json" + queryParams)
         .then( ord => {
-            let ordersArr = []
+            const ordersArr = []
             for (let key in ord.data) {
                 
                 ordersArr.push({
